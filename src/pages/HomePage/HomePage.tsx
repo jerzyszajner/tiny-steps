@@ -4,6 +4,8 @@ import TaskCard from "../../components/TaskCard/TaskCard";
 
 function HomePage() {
   const [maxMinutes, setMaxMinutes] = useState<5 | 15 | 30>(30);
+  const [maxEnergy, setMaxEnergy] = useState<"low" | "medium" | "high">("high");
+
   const visibleTasks = sampleTasks.filter((task) => task.minutes <= maxMinutes);
   return (
     <>
@@ -12,6 +14,10 @@ function HomePage() {
       <button onClick={() => setMaxMinutes(15)}>15 min</button>
       <button onClick={() => setMaxMinutes(30)}>30 min</button>
       <p>Showing up to {maxMinutes} min</p>
+      <button onClick={() => setMaxEnergy("low")}>Low</button>
+      <button onClick={() => setMaxEnergy("medium")}>Medium</button>
+      <button onClick={() => setMaxEnergy("high")}>High</button>
+      <p>Showing up to {maxEnergy} energy</p>
       <ul>
         {visibleTasks.map((task) => (
           <li key={task.id}>
