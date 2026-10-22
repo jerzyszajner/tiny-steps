@@ -4,6 +4,7 @@ import TaskCard from "../../components/TaskCard/TaskCard";
 
 function HomePage() {
   const [maxMinutes, setMaxMinutes] = useState<5 | 15 | 30>(30);
+  const visibleTasks = sampleTasks.filter((task) => task.minutes <= maxMinutes);
   return (
     <>
       <h1>Tasks</h1>
@@ -12,7 +13,7 @@ function HomePage() {
       <button onClick={() => setMaxMinutes(30)}>30 min</button>
       <p>Showing up to {maxMinutes} min</p>
       <ul>
-        {sampleTasks.map((task) => (
+        {visibleTasks.map((task) => (
           <li key={task.id}>
             <TaskCard task={task} />
           </li>
