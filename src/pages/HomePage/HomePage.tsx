@@ -2,11 +2,17 @@ import { useState } from "react";
 import { sampleTasks } from "../../data/sampleTasks";
 import TaskCard from "../../components/TaskCard/TaskCard";
 
+const energyOrder = { low: 1, medium: 2, high: 3 };
+
 function HomePage() {
   const [maxMinutes, setMaxMinutes] = useState<5 | 15 | 30>(30);
   const [maxEnergy, setMaxEnergy] = useState<"low" | "medium" | "high">("high");
 
-  const visibleTasks = sampleTasks.filter((task) => task.minutes <= maxMinutes);
+  const visibleTasks = sampleTasks.filter(
+    (task) =>
+      task.minutes <= maxMinutes &&
+      energyOrder[task.energy] <= energyOrder[maxEnergy],
+  );
   return (
     <>
       <h1>Tasks</h1>
