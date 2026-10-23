@@ -16,9 +16,11 @@ function TaskDetailsPage() {
 
   return (
     <>
-      <h1>{task?.title}</h1>
-
-      <p>{id}</p>
+      <h1>{task.title}</h1>
+      <p>{task.minutes} min</p>
+      <p>{task.energy}</p>
+      {task.note && <p>{task.note}</p>}
+      {task.done && <p>Done</p>}
     </>
   );
 }
