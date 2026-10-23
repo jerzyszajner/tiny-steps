@@ -1,5 +1,14 @@
+import { useParams } from "react-router";
+
 function TaskDetailsPage() {
-  return <h1>Task details</h1>;
+  const { id } = useParams();
+
+  return (
+    <>
+      <h1>Task details</h1>
+      <p>{id}</p>
+    </>
+  );
 }
 
 export default TaskDetailsPage;
