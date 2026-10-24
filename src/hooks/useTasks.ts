@@ -12,8 +12,6 @@ export function useTasks() {
 
     const loadTasks = async () => {
       try {
-        setError(null);
-        setIsLoading(true);
         const data = await getTasks();
         if (!cancelled) setTasks(data);
       } catch (err) {
