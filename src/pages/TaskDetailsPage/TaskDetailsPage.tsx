@@ -1,9 +1,19 @@
 import { Link, useParams } from "react-router";
-import { sampleTasks } from "../../data/sampleTasks";
+import { useTasks } from "../../hooks/useTasks";
 
 function TaskDetailsPage() {
+  const { tasks, isLoading, error } = useTasks();
   const { id } = useParams();
-  const task = sampleTasks.find((t) => t.id === id);
+
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
+
+  if (error) {
+    return <p>{error}</p>;
+  }
+
+  const task = tasks.find((t) => t.id === id);
 
   if (!task) {
     return (
