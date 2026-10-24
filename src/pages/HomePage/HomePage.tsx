@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { sampleTasks } from "../../data/sampleTasks";
+import { useTasks } from "../../hooks/useTasks";
 import TaskCard from "../../components/TaskCard/TaskCard";
 
 const energyOrder = { low: 1, medium: 2, high: 3 };
@@ -8,7 +8,17 @@ function HomePage() {
   const [maxMinutes, setMaxMinutes] = useState<5 | 15 | 30>(30);
   const [maxEnergy, setMaxEnergy] = useState<"low" | "medium" | "high">("high");
 
-  const visibleTasks = sampleTasks.filter(
+  const { tasks, isLoading, error } = useTasks();
+
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
+
+  if (error) {
+    return <p>{error}</p>;
+  }
+
+  const visibleTasks = tasks.filter(
     (task) =>
       task.minutes <= maxMinutes &&
       energyOrder[task.energy] <= energyOrder[maxEnergy],
