@@ -17,6 +17,7 @@ No AI, UI libraries or Google Maps.
 ## Code style
 
 - Components are `function` declarations, not arrows. No `import React`.
+- Named exports only, no `export default`.
 - Component and file share one name, PascalCase. Pages end with `Page` and live in their own folder (`pages/HomePage/HomePage.tsx`). JSX files are `.tsx`, the rest `.ts`.
 - Router in Declarative mode (`BrowserRouter`, `Routes`, `Route`), imported from `react-router`.
 - Routes: `/`, `/tasks/:id`, `/login`, `*`.
