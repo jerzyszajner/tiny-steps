@@ -1,7 +1,7 @@
 import { Link, useParams } from "react-router";
 import { useTasks } from "../../hooks/useTasks";
 
-function TaskDetailsPage() {
+export function TaskDetailsPage() {
   const { tasks, isLoading, error } = useTasks();
   const { id } = useParams();
 
@@ -34,5 +34,3 @@ function TaskDetailsPage() {
     </>
   );
 }
-
-export default TaskDetailsPage;

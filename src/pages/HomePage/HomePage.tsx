@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { useTasks } from "../../hooks/useTasks";
-import TaskCard from "../../components/TaskCard/TaskCard";
+import { TaskCard } from "../../components/TaskCard/TaskCard";
 
 const energyOrder = { low: 1, medium: 2, high: 3 };
 
-function HomePage() {
+export function HomePage() {
   const [maxMinutes, setMaxMinutes] = useState<5 | 15 | 30>(30);
   const [maxEnergy, setMaxEnergy] = useState<"low" | "medium" | "high">("high");
 
@@ -44,5 +44,3 @@ function HomePage() {
     </>
   );
 }
-
-export default HomePage;

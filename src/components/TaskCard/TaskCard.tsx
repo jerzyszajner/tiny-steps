@@ -3,7 +3,7 @@ import type { Task } from "../../types/task";
 
 type TaskCardProps = { task: Task };
 
-function TaskCard({ task }: TaskCardProps) {
+export function TaskCard({ task }: TaskCardProps) {
   return (
     <Link to={`/tasks/${task.id}`}>
       <>
@@ -16,5 +16,3 @@ function TaskCard({ task }: TaskCardProps) {
     </Link>
   );
 }
-
-export default TaskCard;

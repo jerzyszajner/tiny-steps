@@ -1,6 +1,6 @@
 import { Link, Outlet } from "react-router";
 
-function Layout() {
+export function Layout() {
   return (
     <>
       <nav>
@@ -13,5 +13,3 @@ function Layout() {
     </>
   );
 }
-
-export default Layout;

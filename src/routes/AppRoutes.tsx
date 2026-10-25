@@ -1,12 +1,12 @@
 import { BrowserRouter, Routes, Route } from "react-router";
-import Layout from "../components/Layout/Layout";
+import { Layout } from "../components/Layout/Layout";
 import { ProtectedRoute } from "../components/ProtectedRoute/ProtectedRoute";
-import HomePage from "../pages/HomePage/HomePage";
-import TaskDetailsPage from "../pages/TaskDetailsPage/TaskDetailsPage";
-import LoginPage from "../pages/LoginPage/LoginPage";
-import NotFound from "../pages/NotFound/NotFound";
+import { HomePage } from "../pages/HomePage/HomePage";
+import { TaskDetailsPage } from "../pages/TaskDetailsPage/TaskDetailsPage";
+import { LoginPage } from "../pages/LoginPage/LoginPage";
+import { NotFound } from "../pages/NotFound/NotFound";
 
-function AppRoutes() {
+export function AppRoutes() {
   return (
     <BrowserRouter>
       <Routes>
@@ -34,5 +34,3 @@ function AppRoutes() {
     </BrowserRouter>
   );
 }
-
-export default AppRoutes;
