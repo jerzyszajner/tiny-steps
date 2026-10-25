@@ -1,12 +1,21 @@
 import { useState } from "react";
+import { useNavigate } from "react-router";
+import { signIn } from "../../services/authService";
 
 export function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  function handleSubmit(e: React.SubmitEvent<HTMLFormElement>) {
+  const navigate = useNavigate();
+
+  async function handleSubmit(e: React.SubmitEvent<HTMLFormElement>) {
     e.preventDefault();
-    console.log(email);
+    try {
+      await signIn(email, password);
+      navigate("/");
+    } catch (err) {
+      console.error(err);
+    }
   }
 
   return (
