@@ -27,6 +27,7 @@ No AI, UI libraries or Google Maps.
 
 - Progress and next steps live in `notes/PLAN.md`. Work on one step at a time.
 - New ideas go to `notes/PARKING.md`, not into the code.
+- Always use Context7 when I need library/API documentation, code generation, setup or configuration steps, without me having to explicitly ask. Use the library version from `package.json`.
 
 ## Styling
 
