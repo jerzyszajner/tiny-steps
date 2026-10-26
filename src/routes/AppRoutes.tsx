@@ -4,6 +4,7 @@ import { ProtectedRoute } from "../components/ProtectedRoute/ProtectedRoute";
 import { HomePage } from "../pages/HomePage/HomePage";
 import { TaskDetailsPage } from "../pages/TaskDetailsPage/TaskDetailsPage";
 import { LoginPage } from "../pages/LoginPage/LoginPage";
+import { SignUpPage } from "../pages/SignUpPage/SignUpPage";
 import { NotFound } from "../pages/NotFound/NotFound";
 
 export function AppRoutes() {
@@ -28,6 +29,7 @@ export function AppRoutes() {
             }
           />
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/signup" element={<SignUpPage />} />
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { signIn } from "../../services/authService";
 
 export function LoginPage() {
@@ -44,6 +44,7 @@ export function LoginPage() {
           autoComplete="current-password"
         />
         <button type="submit">Log in</button>
+        <Link to="/signup">No account? Create one</Link>
         {error && <p>{error}</p>}
       </form>
     </>
