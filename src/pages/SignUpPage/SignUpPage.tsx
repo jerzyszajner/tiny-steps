@@ -47,6 +47,7 @@ export function SignUpPage() {
         <Link to="/login">Already have an account? Log in</Link>
         {error && <p>{error}</p>}
       </form>
+      <Link to="/welcome">Back</Link>
     </>
   );
 }
