@@ -20,7 +20,7 @@ No AI, UI libraries or Google Maps.
 - Named exports only, no `export default`.
 - Component and file share one name, PascalCase. Pages end with `Page` and live in their own folder (`pages/HomePage/HomePage.tsx`). JSX files are `.tsx`, the rest `.ts`.
 - Router in Declarative mode (`BrowserRouter`, `Routes`, `Route`), imported from `react-router`.
-- Routes: `/`, `/tasks/:id`, `/login`, `/signup`, `*`.
+- Routes: `/`, `/tasks/:id`, `/welcome`, `/login`, `/signup`, `*`.
 - Imports: external packages first, then project files (`../` before `./`), then `import type`, then styles.
 
 ## Workflow
