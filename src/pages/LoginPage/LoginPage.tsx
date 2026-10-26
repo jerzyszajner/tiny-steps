@@ -5,6 +5,7 @@ import { signIn } from "../../services/authService";
 export function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState<string | null>(null);
 
   const navigate = useNavigate();
 
@@ -14,7 +15,7 @@ export function LoginPage() {
       await signIn(email, password);
       navigate("/");
     } catch (err) {
-      console.error(err);
+      setError(err instanceof Error ? err.message : "Failed to Log in");
     }
   }
 
@@ -43,6 +44,7 @@ export function LoginPage() {
           autoComplete="current-password"
         />
         <button type="submit">Log in</button>
+        {error && <p>{error}</p>}
       </form>
     </>
   );
