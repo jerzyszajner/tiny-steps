@@ -6,6 +6,7 @@ import { HomePage } from "../pages/HomePage/HomePage";
 import { TaskDetailsPage } from "../pages/TaskDetailsPage/TaskDetailsPage";
 import { LoginPage } from "../pages/LoginPage/LoginPage";
 import { SignUpPage } from "../pages/SignUpPage/SignUpPage";
+import { AddTaskPage } from "../pages/AddTaskPage/AddTaskPage";
 import { NotFound } from "../pages/NotFound/NotFound";
 
 export function AppRoutes() {
@@ -26,6 +27,14 @@ export function AppRoutes() {
             element={
               <ProtectedRoute>
                 <TaskDetailsPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/tasks/new"
+            element={
+              <ProtectedRoute>
+                <AddTaskPage />
               </ProtectedRoute>
             }
           />
