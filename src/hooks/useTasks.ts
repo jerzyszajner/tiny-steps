@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useAuthContext } from "../context/AuthContext";
 import { getTasks } from "../services/tasksService";
 import type { Task } from "../types/task";
 
@@ -7,12 +8,20 @@ export function useTasks() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
+  const { user } = useAuthContext();
+  const uid = user?.uid;
+
   useEffect(() => {
     let cancelled = false;
 
     const loadTasks = async () => {
+      if (!uid) {
+        setIsLoading(false);
+        return;
+      }
       try {
-        const data = await getTasks();
+        setError(null);
+        const data = await getTasks(uid);
         if (!cancelled) setTasks(data);
       } catch (err) {
         if (!cancelled) {
@@ -26,7 +35,7 @@ export function useTasks() {
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [uid]);
 
   return { tasks, isLoading, error };
 }

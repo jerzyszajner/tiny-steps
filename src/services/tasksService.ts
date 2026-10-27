@@ -1,10 +1,13 @@
-import { addDoc, collection, getDocs } from "firebase/firestore";
+import { addDoc, collection, getDocs, query, where } from "firebase/firestore";
 import { database } from "./firebase";
 import type { Task } from "../types/task";
 
-export async function getTasks(): Promise<Task[]> {
-  const querySnapshot = await getDocs(collection(database, "tasks"));
-
+export async function getTasks(uid: string): Promise<Task[]> {
+  const tasksQuery = query(
+    collection(database, "tasks"),
+    where("userId", "==", uid),
+  );
+  const querySnapshot = await getDocs(tasksQuery);
   return querySnapshot.docs.map((doc) => {
     const data = doc.data();
     return {
