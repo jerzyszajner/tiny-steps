@@ -1,13 +1,21 @@
+import { useState } from "react";
+import { useNavigate } from "react-router";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { taskSchema } from "../../schemas/taskSchema";
+import { addTask } from "../../services/tasksService";
 import type { TaskFormValues } from "../../schemas/taskSchema";
+import type { Task } from "../../types/task";
 
 export function AddTaskPage() {
+  const [error, setError] = useState<string | null>(null);
+
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm<TaskFormValues>({
     resolver: zodResolver(taskSchema),
     defaultValues: {
@@ -16,10 +24,24 @@ export function AddTaskPage() {
       energy: "low",
       note: "",
     },
+    mode: "onBlur",
   });
 
-  function onSubmit(data: TaskFormValues) {
-    console.log(data);
+  async function onSubmit(data: TaskFormValues) {
+    const task: Omit<Task, "id"> = {
+      title: data.title,
+      minutes: Number(data.minutes) as Task["minutes"],
+      energy: data.energy,
+      note: data.note,
+      done: false,
+    };
+
+    try {
+      await addTask(task);
+      navigate("/");
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Failed to add task");
+    }
   }
 
   return (
@@ -71,7 +93,10 @@ export function AddTaskPage() {
         <label htmlFor="note">Note (optional)</label>
         <textarea id="note" rows={4} {...register("note")}></textarea>
         {errors.note && <p>{errors.note.message}</p>}
-        <button type="submit">Add task</button>
+        <button type="submit" disabled={isSubmitting}>
+          {isSubmitting ? "Adding..." : "Add task"}
+        </button>
+        {error && <p>{error}</p>}
       </form>
     </>
   );
