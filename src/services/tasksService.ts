@@ -9,6 +9,7 @@ export async function getTasks(): Promise<Task[]> {
     const data = doc.data();
     return {
       id: doc.id,
+      userId: data.userId,
       title: data.title,
       minutes: data.minutes,
       energy: data.energy,

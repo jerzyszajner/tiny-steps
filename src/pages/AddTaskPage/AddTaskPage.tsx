@@ -4,6 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { taskSchema } from "../../schemas/taskSchema";
 import { addTask } from "../../services/tasksService";
+import { useAuthContext } from "../../context/AuthContext";
 import type { TaskFormValues } from "../../schemas/taskSchema";
 import type { Task } from "../../types/task";
 
@@ -11,6 +12,7 @@ export function AddTaskPage() {
   const [error, setError] = useState<string | null>(null);
 
   const navigate = useNavigate();
+  const { user } = useAuthContext();
 
   const {
     register,
@@ -28,7 +30,13 @@ export function AddTaskPage() {
   });
 
   async function onSubmit(data: TaskFormValues) {
+    if (!user) {
+      setError("You must be logged in to add a task");
+      return;
+    }
+
     const task: Omit<Task, "id"> = {
+      userId: user.uid,
       title: data.title,
       minutes: Number(data.minutes) as Task["minutes"],
       energy: data.energy,
