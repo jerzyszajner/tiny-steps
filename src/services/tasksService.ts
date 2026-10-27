@@ -1,4 +1,4 @@
-import { collection, getDocs } from "firebase/firestore";
+import { addDoc, collection, getDocs } from "firebase/firestore";
 import { database } from "./firebase";
 import type { Task } from "../types/task";
 
@@ -16,4 +16,8 @@ export async function getTasks(): Promise<Task[]> {
       done: data.done,
     };
   });
+}
+
+export async function addTask(task: Omit<Task, "id">): Promise<void> {
+  await addDoc(collection(database, "tasks"), task);
 }
