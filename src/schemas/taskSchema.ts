@@ -10,7 +10,10 @@ export const minutesSchema = z.enum(["5", "15", "30"]);
 
 export const energySchema = z.enum(["low", "medium", "high"]);
 
-export const noteSchema = z.string().max(200, "Use 200 characters or fewer");
+export const noteSchema = z
+  .string()
+  .trim()
+  .max(200, "Use 200 characters or fewer");
 
 export const taskSchema = z.object({
   title: titleSchema,
