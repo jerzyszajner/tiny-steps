@@ -9,7 +9,12 @@ export function Navbar({ user, onClick }: NavbarProps) {
       <Link to="/">tiny-steps</Link>
       <div>
         {user ? (
-          <button onClick={onClick}>Log out</button>
+          <>
+            <Link to="/">List</Link>
+            <Link to="/tasks/new">Add task</Link>
+            <span>{user.email}</span>
+            <button onClick={onClick}>Log out</button>
+          </>
         ) : (
           <Link to="/login">Log in</Link>
         )}
