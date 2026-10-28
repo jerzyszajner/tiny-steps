@@ -1,8 +1,8 @@
 import { z } from "zod";
 
-export const emailSchema = z.email("Enter a valid email");
+const emailSchema = z.email("Enter a valid email");
 
-export const passwordSchema = z
+const passwordSchema = z
   .string()
   .min(1, "Enter password")
   .max(50, "Use 50 characters or fewer");
