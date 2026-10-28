@@ -1,8 +1,13 @@
+import { useState } from "react";
 import { Link, useParams } from "react-router";
+import { updateTask } from "../../services/tasksService";
 import { useTasks } from "../../hooks/useTasks";
 
 export function TaskDetailsPage() {
-  const { tasks, isLoading, error } = useTasks();
+  const [isUpdating, setIsUpdating] = useState(false);
+  const [updateError, setUpdateError] = useState<string | null>(null);
+
+  const { tasks, isLoading, refetch, error } = useTasks();
   const { id } = useParams();
 
   if (isLoading) {
@@ -24,6 +29,21 @@ export function TaskDetailsPage() {
     );
   }
 
+  const handleToggleDone = async () => {
+    setUpdateError(null);
+    setIsUpdating(true);
+    try {
+      await updateTask(task.id, !task.done);
+      refetch();
+    } catch (err) {
+      setUpdateError(
+        err instanceof Error ? err.message : "Failed to update task",
+      );
+    } finally {
+      setIsUpdating(false);
+    }
+  };
+
   return (
     <>
       <Link to="/">Back to list</Link>
@@ -31,7 +51,10 @@ export function TaskDetailsPage() {
       <p>{task.minutes} min</p>
       <p>{task.energy}</p>
       {task.note && <p>{task.note}</p>}
-      {task.done && <p>Done</p>}
+      <button onClick={handleToggleDone} disabled={isUpdating}>
+        {task.done ? "Mark as not done" : "Mark as done"}
+      </button>
+      {updateError && <p>{updateError}</p>}
     </>
   );
 }
