@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { loginSchema } from "../../schemas/loginSchema";
+import { getAuthErrorMessage } from "../../utils/getAuthErrorMessage";
 import { signIn } from "../../services/authService";
 import type { LoginFormValues } from "../../schemas/loginSchema";
 
@@ -25,11 +26,12 @@ export function LoginPage() {
   });
 
   async function onSubmit(data: LoginFormValues) {
+    setError(null);
     try {
       await signIn(data.email, data.password);
       navigate("/");
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Failed to log in");
+      setError(getAuthErrorMessage(err, "Failed to log in"));
     }
   }
 

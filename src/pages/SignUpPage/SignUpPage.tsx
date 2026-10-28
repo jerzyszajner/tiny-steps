@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { signUpSchema } from "../../schemas/signUpSchema";
+import { getAuthErrorMessage } from "../../utils/getAuthErrorMessage";
 import { signUp } from "../../services/authService";
 import type { SignUpFormValues } from "../../schemas/signUpSchema";
 
@@ -25,11 +26,12 @@ export function SignUpPage() {
   });
 
   async function onSubmit(data: SignUpFormValues) {
+    setError(null);
     try {
       await signUp(data.email, data.password);
       navigate("/");
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Failed to Sign up");
+      setError(getAuthErrorMessage(err, "Failed to sign up"));
     }
   }
 
