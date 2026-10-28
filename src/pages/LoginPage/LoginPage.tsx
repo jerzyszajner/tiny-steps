@@ -8,9 +8,14 @@ import { signIn } from "../../services/authService";
 import type { LoginFormValues } from "../../schemas/loginSchema";
 
 export function LoginPage() {
+  const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   const navigate = useNavigate();
+
+  function togglePasswordVisibility() {
+    setShowPassword((prev) => !prev);
+  }
 
   const {
     register,
@@ -50,12 +55,15 @@ export function LoginPage() {
         {errors.email && <p>{errors.email.message}</p>}
         <label htmlFor="password">Password</label>
         <input
-          type="password"
+          type={showPassword ? "text" : "password"}
           id="password"
           placeholder="Enter your password"
           {...register("password")}
           autoComplete="current-password"
         />
+        <button type="button" onClick={togglePasswordVisibility}>
+          {showPassword ? "Hide" : "Show"}
+        </button>
         {errors.password && <p>{errors.password.message}</p>}
         <button type="submit" disabled={isSubmitting}>
           {isSubmitting ? "Logging in..." : "Log in"}
