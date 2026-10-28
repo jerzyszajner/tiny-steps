@@ -1,4 +1,12 @@
-import { addDoc, collection, getDocs, query, where } from "firebase/firestore";
+import {
+  addDoc,
+  collection,
+  doc,
+  getDocs,
+  query,
+  updateDoc,
+  where,
+} from "firebase/firestore";
 import { database } from "./firebase";
 import type { Task } from "../types/task";
 
@@ -8,10 +16,10 @@ export async function getTasks(uid: string): Promise<Task[]> {
     where("userId", "==", uid),
   );
   const querySnapshot = await getDocs(tasksQuery);
-  return querySnapshot.docs.map((doc) => {
-    const data = doc.data();
+  return querySnapshot.docs.map((taskDoc) => {
+    const data = taskDoc.data();
     return {
-      id: doc.id,
+      id: taskDoc.id,
       userId: data.userId,
       title: data.title,
       minutes: data.minutes,
@@ -24,4 +32,9 @@ export async function getTasks(uid: string): Promise<Task[]> {
 
 export async function addTask(task: Omit<Task, "id">): Promise<void> {
   await addDoc(collection(database, "tasks"), task);
+}
+
+export async function updateTask(id: string, done: boolean): Promise<void> {
+  const taskRef = doc(database, "tasks", id);
+  await updateDoc(taskRef, { done });
 }
