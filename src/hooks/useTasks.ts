@@ -6,6 +6,7 @@ import type { Task } from "../types/task";
 export function useTasks() {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [reloadKey, setReloadKey] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   const { user } = useAuthContext();
@@ -35,7 +36,11 @@ export function useTasks() {
     return () => {
       cancelled = true;
     };
-  }, [uid]);
+  }, [uid, reloadKey]);
 
-  return { tasks, isLoading, error };
+  function refetch() {
+    setReloadKey((prev) => !prev);
+  }
+
+  return { tasks, isLoading, refetch, error };
 }
