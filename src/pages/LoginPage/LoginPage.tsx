@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { loginSchema } from "../../schemas/loginSchema";
-import { getAuthErrorMessage } from "../../utils/getAuthErrorMessage";
+import { getAuthErrorMessage } from "../../services/getAuthErrorMessage";
 import { signIn } from "../../services/authService";
 import type { LoginFormValues } from "../../schemas/loginSchema";
 
