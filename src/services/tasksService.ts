@@ -2,6 +2,7 @@ import {
   addDoc,
   collection,
   doc,
+  getDoc,
   getDocs,
   query,
   updateDoc,
@@ -28,6 +29,23 @@ export async function getTasks(uid: string): Promise<Task[]> {
       done: data.done,
     };
   });
+}
+
+export async function getTask(id: string): Promise<Task | null> {
+  const docSnapshot = await getDoc(doc(database, "tasks", id));
+  if (!docSnapshot.exists()) {
+    return null;
+  }
+  const data = docSnapshot.data();
+  return {
+    id: docSnapshot.id,
+    userId: data.userId,
+    title: data.title,
+    minutes: data.minutes,
+    energy: data.energy,
+    note: data.note,
+    done: data.done,
+  };
 }
 
 export async function addTask(task: Omit<Task, "id">): Promise<void> {
