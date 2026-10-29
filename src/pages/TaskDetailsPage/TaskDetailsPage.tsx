@@ -1,14 +1,14 @@
 import { useState } from "react";
 import { Link, useParams } from "react-router";
 import { updateTask } from "../../services/tasksService";
-import { useTasks } from "../../hooks/useTasks";
+import { useTask } from "../../hooks/useTask";
 
 export function TaskDetailsPage() {
   const [isUpdating, setIsUpdating] = useState(false);
   const [updateError, setUpdateError] = useState<string | null>(null);
 
-  const { tasks, isLoading, refetch, error } = useTasks();
   const { id } = useParams();
+  const { task, isLoading, refetch, error } = useTask(id);
 
   if (isLoading) {
     return <p>Loading...</p>;
@@ -17,8 +17,6 @@ export function TaskDetailsPage() {
   if (error) {
     return <p>{error}</p>;
   }
-
-  const task = tasks.find((t) => t.id === id);
 
   if (!task) {
     return (
