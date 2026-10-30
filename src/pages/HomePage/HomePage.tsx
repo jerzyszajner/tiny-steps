@@ -1,8 +1,7 @@
 import { useState } from "react";
 import { useTasks } from "../../hooks/useTasks";
+import { filterTask } from "../../utils/filterTasks";
 import { TaskCard } from "../../components/TaskCard/TaskCard";
-
-const energyOrder = { low: 1, medium: 2, high: 3 };
 
 export function HomePage() {
   const [maxMinutes, setMaxMinutes] = useState<5 | 15 | 30>(30);
@@ -18,11 +17,8 @@ export function HomePage() {
     return <p>{error}</p>;
   }
 
-  const visibleTasks = tasks.filter(
-    (task) =>
-      task.minutes <= maxMinutes &&
-      energyOrder[task.energy] <= energyOrder[maxEnergy],
-  );
+  const visibleTasks = filterTask(tasks, maxMinutes, maxEnergy);
+
   return (
     <>
       <h1>Tasks</h1>
