@@ -2,10 +2,11 @@ import { useState } from "react";
 import { useTasks } from "../../hooks/useTasks";
 import { filterTask } from "../../utils/filterTasks";
 import { TaskCard } from "../../components/TaskCard/TaskCard";
+import type { Task } from "../../types/task";
 
 export function HomePage() {
-  const [maxMinutes, setMaxMinutes] = useState<5 | 15 | 30>(30);
-  const [maxEnergy, setMaxEnergy] = useState<"low" | "medium" | "high">("high");
+  const [maxMinutes, setMaxMinutes] = useState<Task["minutes"]>(30);
+  const [maxEnergy, setMaxEnergy] = useState<Task["energy"]>("high");
 
   const { tasks, isLoading, error } = useTasks();
 
