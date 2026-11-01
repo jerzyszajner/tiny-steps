@@ -7,7 +7,7 @@ import { TaskDetailsPage } from "../pages/TaskDetailsPage/TaskDetailsPage";
 import { LoginPage } from "../pages/LoginPage/LoginPage";
 import { SignUpPage } from "../pages/SignUpPage/SignUpPage";
 import { AddTaskPage } from "../pages/AddTaskPage/AddTaskPage";
-import { NotFound } from "../pages/NotFound/NotFound";
+import { NotFoundPage } from "../pages/NotFoundPage/NotFoundPage";
 
 export function AppRoutes() {
   return (
@@ -41,7 +41,7 @@ export function AppRoutes() {
           <Route path="/welcome" element={<WelcomePage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignUpPage />} />
-          <Route path="*" element={<NotFound />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>
     </BrowserRouter>
