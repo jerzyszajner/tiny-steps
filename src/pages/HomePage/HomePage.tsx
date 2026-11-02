@@ -31,13 +31,17 @@ export function HomePage() {
       <button onClick={() => setMaxEnergy("medium")}>Medium</button>
       <button onClick={() => setMaxEnergy("high")}>High</button>
       <p>Showing up to {maxEnergy} energy</p>
-      <ul>
-        {visibleTasks.map((task) => (
-          <li key={task.id}>
-            <TaskCard task={task} />
-          </li>
-        ))}
-      </ul>
+      {visibleTasks.length === 0 ? (
+        <p>No tasks match these filters</p>
+      ) : (
+        <ul>
+          {visibleTasks.map((task) => (
+            <li key={task.id}>
+              <TaskCard task={task} />
+            </li>
+          ))}
+        </ul>
+      )}
     </>
   );
 }
