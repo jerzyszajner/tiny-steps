@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router";
 import { Layout } from "../components/Layout/Layout";
 import { ProtectedRoute } from "../components/ProtectedRoute/ProtectedRoute";
+import { PublicRoute } from "../components/PublicRoute/PublicRoute";
 import { WelcomePage } from "../pages/WelcomePage/WelcomePage";
 import { HomePage } from "../pages/HomePage/HomePage";
 import { TaskDetailsPage } from "../pages/TaskDetailsPage/TaskDetailsPage";
@@ -38,9 +39,30 @@ export function AppRoutes() {
               </ProtectedRoute>
             }
           />
-          <Route path="/welcome" element={<WelcomePage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/signup" element={<SignUpPage />} />
+          <Route
+            path="/welcome"
+            element={
+              <PublicRoute>
+                <WelcomePage />
+              </PublicRoute>
+            }
+          />
+          <Route
+            path="/login"
+            element={
+              <PublicRoute>
+                <LoginPage />
+              </PublicRoute>
+            }
+          />
+          <Route
+            path="/signup"
+            element={
+              <PublicRoute>
+                <SignUpPage />
+              </PublicRoute>
+            }
+          />
           <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>
