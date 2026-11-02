@@ -13,6 +13,7 @@ No AI, UI libraries or Google Maps.
 - Commits: imperative, lowercase, one change each (e.g. `add task list page`).
 - Never commit `.env` files. Branch: `main` only.
 - Components do not touch Firebase directly: use `services/` and hooks.
+- Errors: log the real error with `console.error(err)`. Show the user only our own text (fixed or mapped, like `getAuthErrorMessage`), never `err.message` from a library.
 
 ## Code style
 
