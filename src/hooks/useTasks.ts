@@ -25,8 +25,9 @@ export function useTasks() {
         const data = await getTasks(uid);
         if (!cancelled) setTasks(data);
       } catch (err) {
+        console.error(err);
         if (!cancelled) {
-          setError(err instanceof Error ? err.message : "Failed to load tasks");
+          setError("Failed to load tasks");
         }
       } finally {
         if (!cancelled) setIsLoading(false);

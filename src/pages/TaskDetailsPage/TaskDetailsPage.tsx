@@ -34,9 +34,8 @@ export function TaskDetailsPage() {
       await updateTask(task.id, !task.done);
       refetch();
     } catch (err) {
-      setUpdateError(
-        err instanceof Error ? err.message : "Failed to update task",
-      );
+      console.error(err);
+      setUpdateError("Failed to update task");
     } finally {
       setIsUpdating(false);
     }

@@ -35,14 +35,14 @@ describe("useTasks", () => {
     expect(result.current.tasks).toEqual([task]);
   });
 
-  it("returns the error message when the service fails", async () => {
+  it("returns a fixed error message when the service fails", async () => {
     vi.mocked(useAuthContext).mockReturnValue(loggedIn);
     vi.mocked(getTasks).mockRejectedValue(new Error("fail"));
 
     const { result } = renderHook(() => useTasks());
     await waitFor(() => expect(result.current.isLoading).toBe(false));
 
-    expect(result.current.error).toBe("fail");
+    expect(result.current.error).toBe("Failed to load tasks");
   });
 
   it("does not call the service when there is no user", async () => {

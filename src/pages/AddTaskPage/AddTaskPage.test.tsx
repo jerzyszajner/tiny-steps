@@ -60,7 +60,7 @@ describe("AddTaskPage", () => {
     expect(screen.queryByText("Home page")).not.toBeInTheDocument();
   });
 
-  it("shows the error message when saving fails", async () => {
+  it("shows a fixed error message when saving fails", async () => {
     const user = userEvent.setup();
     vi.mocked(addTask).mockRejectedValue(new Error("Network down"));
     renderPage();
@@ -68,7 +68,7 @@ describe("AddTaskPage", () => {
     await user.type(screen.getByLabelText("Title"), "Wash dishes");
     await user.click(screen.getByRole("button", { name: "Add task" }));
 
-    expect(await screen.findByText("Network down")).toBeInTheDocument();
+    expect(await screen.findByText("Failed to add task")).toBeInTheDocument();
     expect(screen.queryByText("Home page")).not.toBeInTheDocument();
   });
 });

@@ -48,7 +48,8 @@ export function AddTaskPage() {
       await addTask(task);
       navigate("/");
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Failed to add task");
+      console.error(err);
+      setError("Failed to add task");
     }
   }
 
