@@ -7,3 +7,5 @@ export type Task = {
   note: string;
   done: boolean;
 };
+
+export type StatusFilter = "any" | "todo" | "done";
