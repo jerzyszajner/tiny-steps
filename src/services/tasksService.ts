@@ -1,6 +1,7 @@
 import {
   addDoc,
   collection,
+  deleteDoc,
   doc,
   getDoc,
   getDocs,
@@ -55,4 +56,9 @@ export async function addTask(task: Omit<Task, "id">): Promise<void> {
 export async function updateTask(id: string, done: boolean): Promise<void> {
   const taskRef = doc(database, "tasks", id);
   await updateDoc(taskRef, { done });
+}
+
+export async function deleteTask(id: string): Promise<void> {
+  const taskRef = doc(database, "tasks", id);
+  await deleteDoc(taskRef);
 }
