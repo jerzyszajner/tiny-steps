@@ -48,6 +48,7 @@ export function TaskDetailsPage() {
 
   const handleDelete = async () => {
     setDeleteError(null);
+    setIsConfirmOpen(false);
     setIsDeleting(true);
     try {
       await deleteTask(task.id);
@@ -57,7 +58,6 @@ export function TaskDetailsPage() {
       setDeleteError("Failed to delete task");
     } finally {
       setIsDeleting(false);
-      setIsConfirmOpen(false);
     }
   };
 
