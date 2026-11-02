@@ -8,7 +8,7 @@ export function ProtectedRoute({ children }: ProtectedRouteProps) {
   const { user, isLoading } = useAuthContext();
 
   if (isLoading) {
-    return null;
+    return <p>Loading...</p>;
   }
 
   if (!user) {

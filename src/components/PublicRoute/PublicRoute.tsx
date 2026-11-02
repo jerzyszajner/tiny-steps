@@ -8,7 +8,7 @@ export function PublicRoute({ children }: PublicRouteProps) {
   const { user, isLoading } = useAuthContext();
 
   if (isLoading) {
-    return null;
+    return <p>Loading...</p>;
   }
 
   if (user) {
