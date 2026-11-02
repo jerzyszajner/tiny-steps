@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { taskSchema } from "../../schemas/taskSchema";
 import { addTask } from "../../services/tasksService";
 import { useAuthContext } from "../../context/AuthContext";
-import type { TaskFormValues } from "../../schemas/taskSchema";
+import type { TaskFormInput, TaskFormValues } from "../../schemas/taskSchema";
 import type { Task } from "../../types/task";
 
 export function AddTaskPage() {
@@ -18,7 +18,7 @@ export function AddTaskPage() {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
-  } = useForm<TaskFormValues>({
+  } = useForm<TaskFormInput, unknown, TaskFormValues>({
     resolver: zodResolver(taskSchema),
     defaultValues: {
       title: "",
@@ -38,7 +38,7 @@ export function AddTaskPage() {
     const task: Omit<Task, "id"> = {
       userId: user.uid,
       title: data.title,
-      minutes: Number(data.minutes) as Task["minutes"],
+      minutes: data.minutes,
       energy: data.energy,
       note: data.note,
       done: false,
