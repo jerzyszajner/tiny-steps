@@ -57,7 +57,7 @@ describe("ProtectedRoute", () => {
     expect(screen.queryByText("Welcome page")).not.toBeInTheDocument();
   });
 
-  it("renders nothing while auth is loading", () => {
+  it("shows loading text while auth is loading", () => {
     vi.mocked(useAuthContext).mockReturnValue({
       user: null,
       isLoading: true,
@@ -79,6 +79,7 @@ describe("ProtectedRoute", () => {
       </MemoryRouter>,
     );
 
+    expect(screen.getByText("Loading...")).toBeInTheDocument();
     expect(screen.queryByText("Add task page")).not.toBeInTheDocument();
     expect(screen.queryByText("Welcome page")).not.toBeInTheDocument();
   });
