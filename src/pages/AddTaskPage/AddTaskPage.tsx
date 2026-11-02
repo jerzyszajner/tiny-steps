@@ -30,6 +30,7 @@ export function AddTaskPage() {
   });
 
   async function onSubmit(data: TaskFormValues) {
+    setError(null);
     if (!user) {
       setError("You must be logged in to add a task");
       return;
