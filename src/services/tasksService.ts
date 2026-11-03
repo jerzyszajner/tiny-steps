@@ -8,6 +8,7 @@ import {
   query,
   updateDoc,
   where,
+  writeBatch,
 } from "firebase/firestore";
 import { database } from "./firebase";
 import type { Task } from "../types/task";
@@ -61,4 +62,17 @@ export async function updateTask(id: string, done: boolean): Promise<void> {
 export async function deleteTask(id: string): Promise<void> {
   const taskRef = doc(database, "tasks", id);
   await deleteDoc(taskRef);
+}
+
+export async function deleteAllTasks(uid: string): Promise<void> {
+  const tasksQuery = query(
+    collection(database, "tasks"),
+    where("userId", "==", uid),
+  );
+  const querySnapshot = await getDocs(tasksQuery);
+  const batch = writeBatch(database);
+  querySnapshot.docs.forEach((taskDoc) => {
+    batch.delete(taskDoc.ref);
+  });
+  await batch.commit();
 }
