@@ -1,5 +1,5 @@
-import { useEffect, useRef } from "react";
-import type { ReactNode } from "react";
+import { useShowDialog } from "../../hooks/useShowDialog";
+import type { SyntheticEvent } from "react";
 
 type ConfirmDialogProps = {
   isOpen: boolean;
@@ -8,7 +8,6 @@ type ConfirmDialogProps = {
   onCancel: () => void;
   confirmLabel?: string;
   cancelLabel?: string;
-  children?: ReactNode;
 };
 
 export function ConfirmDialog({
@@ -18,20 +17,18 @@ export function ConfirmDialog({
   onCancel,
   confirmLabel = "Confirm",
   cancelLabel = "Cancel",
-  children,
 }: ConfirmDialogProps) {
-  const dialogRef = useRef<HTMLDialogElement>(null);
-  useEffect(() => {
-    if (isOpen) {
-      dialogRef.current?.showModal();
-    } else {
-      dialogRef.current?.close();
-    }
-  }, [isOpen]);
+  const dialogRef = useShowDialog(isOpen);
+
+  function handleDialogCancel(e: SyntheticEvent<HTMLDialogElement>) {
+    // Esc must not close the dialog on its own, the parent decides
+    e.preventDefault();
+    onCancel();
+  }
+
   return (
-    <dialog ref={dialogRef} onCancel={onCancel}>
+    <dialog ref={dialogRef} onCancel={handleDialogCancel}>
       <p>{message}</p>
-      <div>{children}</div>
       <div>
         <button onClick={onConfirm}>{confirmLabel}</button>
         <button onClick={onCancel}>{cancelLabel}</button>
