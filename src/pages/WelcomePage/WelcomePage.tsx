@@ -3,9 +3,11 @@ import styles from "./WelcomePage.module.css";
 
 export function WelcomePage() {
   return (
-    <section className={styles.page}>
+    <section className={styles.page} aria-labelledby="welcome-title">
       <div className={styles.intro}>
-        <h1 className={styles.title}>Start with one small step</h1>
+        <h1 className={styles.title} id="welcome-title">
+          Start with one small step
+        </h1>
         <p className={styles.lead}>
           tiny-steps shows only the tasks that fit the time and energy you have
           right now.
