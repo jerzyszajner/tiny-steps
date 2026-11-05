@@ -7,6 +7,7 @@ import { signUpSchema } from "../../schemas/signUpSchema";
 import { getAuthErrorMessage } from "../../services/getAuthErrorMessage";
 import { signUp } from "../../services/authService";
 import type { SignUpFormValues } from "../../schemas/signUpSchema";
+import styles from "./SignUpPage.module.css";
 
 export function SignUpPage() {
   const [error, setError] = useState<string | null>(null);
@@ -37,33 +38,60 @@ export function SignUpPage() {
   }
 
   return (
-    <>
-      <h1>Create account</h1>
-      <form noValidate onSubmit={handleSubmit(onSubmit)}>
-        <label htmlFor="email">Email</label>
-        <input
-          type="email"
-          id="email"
-          placeholder="Enter your email"
-          {...register("email")}
-          autoComplete="email"
-        />
-        {errors.email && <p>{errors.email.message}</p>}
-        <label htmlFor="password">Password</label>
-        <PasswordInput
-          id="password"
-          placeholder="Enter your password"
-          {...register("password")}
-          autoComplete="new-password"
-        />
-        {errors.password && <p>{errors.password.message}</p>}
-        <button type="submit" disabled={isSubmitting}>
-          {isSubmitting ? "Creating..." : "Create account"}
-        </button>
-        <Link to="/login">Already have an account? Log in</Link>
-        {error && <p>{error}</p>}
+    <section className={styles.page}>
+      <h1 className={styles.title}>Create account</h1>
+      <form
+        className={styles.card}
+        noValidate
+        onSubmit={handleSubmit(onSubmit)}
+      >
+        <div className={styles.field}>
+          <label className={styles.label} htmlFor="email">
+            Email
+          </label>
+          <input
+            className={styles.input}
+            type="email"
+            id="email"
+            placeholder="Enter your email"
+            {...register("email")}
+            autoComplete="email"
+          />
+          {errors.email && (
+            <p className={styles.error}>{errors.email.message}</p>
+          )}
+        </div>
+        <div className={styles.field}>
+          <label className={styles.label} htmlFor="password">
+            Password
+          </label>
+          <PasswordInput
+            id="password"
+            placeholder="Enter your password"
+            {...register("password")}
+            autoComplete="new-password"
+          />
+          {errors.password && (
+            <p className={styles.error}>{errors.password.message}</p>
+          )}
+        </div>
+        <div className={styles.actions}>
+          <button
+            className={styles.submit}
+            type="submit"
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? "Creating..." : "Create account"}
+          </button>
+          <Link className={styles.link} to="/login">
+            Already have an account? Log in
+          </Link>
+        </div>
+        {error && <p className={styles.error}>{error}</p>}
       </form>
-      <Link to="/welcome">Back</Link>
-    </>
+      <Link className={`${styles.link} ${styles.back}`} to="/welcome">
+        Back
+      </Link>
+    </section>
   );
 }
