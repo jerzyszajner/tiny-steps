@@ -70,6 +70,7 @@ export function DeleteAccountDialog({
     <dialog
       ref={dialogRef}
       className={styles.dialog}
+      aria-labelledby="delete-account-message"
       onCancel={handleDialogCancel}
     >
       <form
@@ -77,7 +78,7 @@ export function DeleteAccountDialog({
         noValidate
         onSubmit={handleSubmit(onSubmit)}
       >
-        <p className={styles.message}>
+        <p className={styles.message} id="delete-account-message">
           Delete your account and all your tasks? This cannot be undone.
         </p>
         <div className={styles.field}>
@@ -98,11 +99,7 @@ export function DeleteAccountDialog({
             />
           )}
           {errors.password && (
-            <p
-              className={styles.error}
-              id="delete-password-error"
-              role="alert"
-            >
+            <p className={styles.error} id="delete-password-error" role="alert">
               {errors.password.message}
             </p>
           )}
