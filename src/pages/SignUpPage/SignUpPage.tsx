@@ -2,20 +2,16 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { PasswordInput } from "../../components/PasswordInput/PasswordInput";
 import { signUpSchema } from "../../schemas/signUpSchema";
 import { getAuthErrorMessage } from "../../services/getAuthErrorMessage";
 import { signUp } from "../../services/authService";
 import type { SignUpFormValues } from "../../schemas/signUpSchema";
 
 export function SignUpPage() {
-  const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   const navigate = useNavigate();
-
-  function togglePasswordVisibility() {
-    setShowPassword((prev) => !prev);
-  }
 
   const {
     register,
@@ -54,16 +50,12 @@ export function SignUpPage() {
         />
         {errors.email && <p>{errors.email.message}</p>}
         <label htmlFor="password">Password</label>
-        <input
-          type={showPassword ? "text" : "password"}
+        <PasswordInput
           id="password"
           placeholder="Enter your password"
           {...register("password")}
           autoComplete="new-password"
         />
-        <button type="button" onClick={togglePasswordVisibility}>
-          {showPassword ? "Hide" : "Show"}
-        </button>
         {errors.password && <p>{errors.password.message}</p>}
         <button type="submit" disabled={isSubmitting}>
           {isSubmitting ? "Creating..." : "Create account"}
