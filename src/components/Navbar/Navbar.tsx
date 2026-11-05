@@ -1,4 +1,6 @@
+import { useState } from "react";
 import { Link, NavLink } from "react-router";
+import { Menu } from "lucide-react";
 import type { User } from "firebase/auth";
 import styles from "./Navbar.module.css";
 
@@ -13,6 +15,8 @@ function getLinkClass({ isActive }: { isActive: boolean }) {
 }
 
 export function Navbar({ user, onLogout, onDeleteAccount }: NavbarProps) {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   return (
     <nav className={styles.nav}>
       <Link className={styles.logo} to="/">
@@ -33,6 +37,14 @@ export function Navbar({ user, onLogout, onDeleteAccount }: NavbarProps) {
             </button>
             <button className={styles.button} onClick={onDeleteAccount}>
               Delete account
+            </button>
+            <button
+              className={styles.button}
+              aria-label="Open menu"
+              aria-expanded={isMenuOpen}
+              onClick={() => setIsMenuOpen((prev) => !prev)}
+            >
+              <Menu size={22} />
             </button>
           </>
         ) : (
