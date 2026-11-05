@@ -4,6 +4,7 @@ import { useAuthContext } from "../../context/AuthContext";
 import { signOut } from "../../services/authService";
 import { DeleteAccountDialog } from "../DeleteAccountDialog/DeleteAccountDialog";
 import { Navbar } from "../Navbar/Navbar";
+import styles from "./Layout.module.css";
 
 export function Layout() {
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
@@ -12,14 +13,14 @@ export function Layout() {
 
   return (
     <>
-      <header>
+      <header className={styles.header}>
         <Navbar
           user={user}
           onClick={signOut}
           onDeleteAccountClick={() => setIsDeleteDialogOpen(true)}
         />
       </header>
-      <main>
+      <main className={styles.main}>
         <Outlet />
       </main>
       <DeleteAccountDialog
