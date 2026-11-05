@@ -1,0 +1,81 @@
+.dialog {
+  width: min(420px, calc(100vw - 2 * var(--spacing-4)));
+  margin: auto;
+  padding: var(--spacing-5);
+  background: var(--color-surface);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+}
+
+.dialog::backdrop {
+  background: var(--color-overlay);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+}
+
+.message {
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.label {
+  font-weight: 600;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+}
+
+.error {
+  color: var(--color-danger);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-3);
+}
+
+.delete,
+.cancel {
+  min-height: var(--tap-size);
+  padding: 0 var(--spacing-4);
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  transition: background-color 0.15s;
+}
+
+.delete {
+  background: var(--color-danger);
+  color: var(--color-on-accent);
+  border: none;
+}
+
+.delete:hover {
+  background: var(--color-text);
+}
+
+.cancel {
+  background: var(--color-surface);
+  color: var(--color-text);
+  border: var(--border-width-strong) solid var(--color-border-strong);
+}
+
+.cancel:hover {
+  background: var(--color-accent-soft);
+}
+
+.delete:disabled,
+.cancel:disabled {
+  opacity: 0.7;
+}

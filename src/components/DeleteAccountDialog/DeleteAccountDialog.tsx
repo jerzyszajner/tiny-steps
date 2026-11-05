@@ -9,6 +9,7 @@ import { getAuthErrorMessage } from "../../services/getAuthErrorMessage";
 import { PasswordInput } from "../PasswordInput/PasswordInput";
 import type { SyntheticEvent } from "react";
 import type { DeleteAccountFormValues } from "../../schemas/deleteAccountSchema";
+import styles from "./DeleteAccountDialog.module.css";
 
 type DeleteAccountDialogProps = {
   isOpen: boolean;
@@ -66,27 +67,54 @@ export function DeleteAccountDialog({
   }
 
   return (
-    <dialog ref={dialogRef} onCancel={handleDialogCancel}>
-      <form noValidate onSubmit={handleSubmit(onSubmit)}>
-        <p>Delete your account and all your tasks? This cannot be undone.</p>
-        <label htmlFor="delete-password">Password</label>
-        {/* mounted only while open, so the password is hidden again on reopen */}
-        {isOpen && (
-          <PasswordInput
-            id="delete-password"
-            placeholder="Enter your password"
-            {...register("password")}
-            autoComplete="current-password"
-          />
-        )}
-        {errors.password && <p>{errors.password.message}</p>}
-        <button type="submit" disabled={isSubmitting}>
-          {isSubmitting ? "Deleting..." : "Delete account"}
-        </button>
-        <button type="button" onClick={handleCancel} disabled={isSubmitting}>
-          Keep account
-        </button>
-        {error && <p>{error}</p>}
+    <dialog
+      ref={dialogRef}
+      className={styles.dialog}
+      onCancel={handleDialogCancel}
+    >
+      <form
+        className={styles.form}
+        noValidate
+        onSubmit={handleSubmit(onSubmit)}
+      >
+        <p className={styles.message}>
+          Delete your account and all your tasks? This cannot be undone.
+        </p>
+        <div className={styles.field}>
+          <label className={styles.label} htmlFor="delete-password">
+            Password
+          </label>
+          {/* mounted only while open, so the password is hidden again on reopen */}
+          {isOpen && (
+            <PasswordInput
+              id="delete-password"
+              placeholder="Enter your password"
+              {...register("password")}
+              autoComplete="current-password"
+            />
+          )}
+          {errors.password && (
+            <p className={styles.error}>{errors.password.message}</p>
+          )}
+        </div>
+        <div className={styles.actions}>
+          <button
+            type="submit"
+            className={styles.delete}
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? "Deleting..." : "Delete account"}
+          </button>
+          <button
+            type="button"
+            className={styles.cancel}
+            onClick={handleCancel}
+            disabled={isSubmitting}
+          >
+            Keep account
+          </button>
+        </div>
+        {error && <p className={styles.error}>{error}</p>}
       </form>
     </dialog>
   );
