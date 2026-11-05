@@ -38,11 +38,12 @@
 }
 
 * {
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
 }
 
 body {
-  margin: 0;
   background: var(--color-bg);
   color: var(--color-text);
   font-family: var(--font-sans);
@@ -54,6 +55,14 @@ button,
 input,
 textarea {
   font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
 }
 
 :focus-visible {
