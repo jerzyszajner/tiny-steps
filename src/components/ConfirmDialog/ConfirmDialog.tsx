@@ -35,11 +35,11 @@ export function ConfirmDialog({
     >
       <p className={styles.message}>{message}</p>
       <div className={styles.actions}>
-        <button className={styles.confirm} onClick={onConfirm}>
-          {confirmLabel}
-        </button>
         <button className={styles.cancel} onClick={onCancel}>
           {cancelLabel}
+        </button>
+        <button className={styles.confirm} onClick={onConfirm}>
+          {confirmLabel}
         </button>
       </div>
     </dialog>

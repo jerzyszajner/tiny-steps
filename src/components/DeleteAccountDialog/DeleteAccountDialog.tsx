@@ -109,19 +109,19 @@ export function DeleteAccountDialog({
         </div>
         <div className={styles.actions}>
           <button
-            type="submit"
-            className={styles.delete}
-            disabled={isSubmitting}
-          >
-            {isSubmitting ? "Deleting..." : "Delete account"}
-          </button>
-          <button
             type="button"
             className={styles.cancel}
             onClick={handleCancel}
             disabled={isSubmitting}
           >
             Keep account
+          </button>
+          <button
+            type="submit"
+            className={styles.delete}
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? "Deleting..." : "Delete account"}
           </button>
         </div>
         {error && (
