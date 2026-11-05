@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { Input } from "../../components/Input/Input";
 import { PasswordInput } from "../../components/PasswordInput/PasswordInput";
 import { loginSchema } from "../../schemas/loginSchema";
 import { getAuthErrorMessage } from "../../services/getAuthErrorMessage";
@@ -51,8 +52,7 @@ export function LoginPage() {
           <label className={styles.label} htmlFor="email">
             Email
           </label>
-          <input
-            className={styles.input}
+          <Input
             type="email"
             id="email"
             placeholder="Enter your email"
