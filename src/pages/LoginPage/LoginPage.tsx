@@ -38,8 +38,10 @@ export function LoginPage() {
   }
 
   return (
-    <section className={styles.page}>
-      <h1 className={styles.title}>Log in</h1>
+    <section className={styles.page} aria-labelledby="login-title">
+      <h1 className={styles.title} id="login-title">
+        Log in
+      </h1>
       <form
         className={styles.card}
         noValidate
@@ -56,9 +58,13 @@ export function LoginPage() {
             placeholder="Enter your email"
             {...register("email")}
             autoComplete="email"
+            aria-invalid={!!errors.email}
+            aria-describedby={errors.email ? "email-error" : undefined}
           />
           {errors.email && (
-            <p className={styles.error}>{errors.email.message}</p>
+            <p className={styles.error} id="email-error" role="alert">
+              {errors.email.message}
+            </p>
           )}
         </div>
         <div className={styles.field}>
@@ -70,9 +76,13 @@ export function LoginPage() {
             placeholder="Enter your password"
             {...register("password")}
             autoComplete="current-password"
+            aria-invalid={!!errors.password}
+            aria-describedby={errors.password ? "password-error" : undefined}
           />
           {errors.password && (
-            <p className={styles.error}>{errors.password.message}</p>
+            <p className={styles.error} id="password-error" role="alert">
+              {errors.password.message}
+            </p>
           )}
         </div>
         <div className={styles.actions}>
@@ -87,7 +97,11 @@ export function LoginPage() {
             No account? Create one
           </Link>
         </div>
-        {error && <p className={styles.error}>{error}</p>}
+        {error && (
+          <p className={styles.error} role="alert">
+            {error}
+          </p>
+        )}
       </form>
       <Link className={`${styles.link} ${styles.back}`} to="/welcome">
         Back
