@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
+import { Input } from "../Input/Input";
 import type { ComponentProps } from "react";
 import styles from "./PasswordInput.module.css";
 
@@ -14,7 +15,7 @@ export function PasswordInput(props: PasswordInputProps) {
 
   return (
     <div className={styles.wrapper}>
-      <input
+      <Input
         {...props}
         className={styles.input}
         type={showPassword ? "text" : "password"}
