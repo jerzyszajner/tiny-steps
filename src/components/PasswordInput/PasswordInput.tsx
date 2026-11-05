@@ -3,7 +3,7 @@ import { Eye, EyeOff } from "lucide-react";
 import type { ComponentProps } from "react";
 import styles from "./PasswordInput.module.css";
 
-type PasswordInputProps = Omit<ComponentProps<"input">, "type">;
+type PasswordInputProps = Omit<ComponentProps<"input">, "type" | "className">;
 
 export function PasswordInput(props: PasswordInputProps) {
   const [showPassword, setShowPassword] = useState(false);
