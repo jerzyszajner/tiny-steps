@@ -83,7 +83,7 @@
   height: 100%;
   max-height: none;
   margin: 0;
-  padding: 0;
+  padding: var(--spacing-3) var(--spacing-4);
   overflow-y: auto;
   background: var(--color-surface);
   color: var(--color-text);
@@ -94,18 +94,11 @@
 .menu[open] {
   display: flex;
   flex-direction: column;
+  gap: var(--spacing-2);
 }
 
 .menu::backdrop {
   background: var(--color-overlay);
-}
-
-.menuContent {
-  display: flex;
-  flex: 1 0 auto;
-  flex-direction: column;
-  gap: var(--spacing-2);
-  padding: var(--spacing-3) var(--spacing-4);
 }
 
 .menuHeader {

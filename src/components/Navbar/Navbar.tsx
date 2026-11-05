@@ -57,59 +57,54 @@ export function Navbar({ user, onLogout, onDeleteAccount }: NavbarProps) {
               id="side-menu"
               ref={dialogRef}
               onCancel={() => setIsMenuOpen(false)}
-              onClick={(e) => {
-                if (e.target === e.currentTarget) setIsMenuOpen(false);
-              }}
             >
-              <div className={styles.menuContent}>
-                <div className={styles.menuHeader}>
-                  <span className={`${styles.email} ${styles.menuEmail}`}>
-                    {user.email}
-                  </span>
-                  <button
-                    className={`${styles.button} ${styles.iconButton}`}
-                    aria-label="Close menu"
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    <X size={22} />
-                  </button>
-                </div>
-                <div className={styles.menuActions}>
-                  <NavLink
-                    className={getLinkClass}
-                    to="/"
-                    end
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    List
-                  </NavLink>
-                  <NavLink
-                    className={getLinkClass}
-                    to="/tasks/new"
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    Add task
-                  </NavLink>
-                  <hr className={styles.menuDivider} />
-                  <button
-                    className={styles.button}
-                    onClick={() => {
-                      setIsMenuOpen(false);
-                      onLogout();
-                    }}
-                  >
-                    Log out
-                  </button>
-                  <button
-                    className={styles.button}
-                    onClick={() => {
-                      setIsMenuOpen(false);
-                      onDeleteAccount();
-                    }}
-                  >
-                    Delete account
-                  </button>
-                </div>
+              <div className={styles.menuHeader}>
+                <span className={`${styles.email} ${styles.menuEmail}`}>
+                  {user.email}
+                </span>
+                <button
+                  className={`${styles.button} ${styles.iconButton}`}
+                  aria-label="Close menu"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  <X size={22} />
+                </button>
+              </div>
+              <div className={styles.menuActions}>
+                <NavLink
+                  className={getLinkClass}
+                  to="/"
+                  end
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  List
+                </NavLink>
+                <NavLink
+                  className={getLinkClass}
+                  to="/tasks/new"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Add task
+                </NavLink>
+                <hr className={styles.menuDivider} />
+                <button
+                  className={styles.button}
+                  onClick={() => {
+                    setIsMenuOpen(false);
+                    onLogout();
+                  }}
+                >
+                  Log out
+                </button>
+                <button
+                  className={styles.button}
+                  onClick={() => {
+                    setIsMenuOpen(false);
+                    onDeleteAccount();
+                  }}
+                >
+                  Delete account
+                </button>
               </div>
             </dialog>
           </>
