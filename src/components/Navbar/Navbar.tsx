@@ -46,7 +46,7 @@ export function Navbar({ user, onLogout, onDeleteAccount }: NavbarProps) {
               aria-label="Open menu"
               aria-expanded={isMenuOpen}
               aria-controls="side-menu"
-              onClick={() => setIsMenuOpen((prev) => !prev)}
+              onClick={() => setIsMenuOpen(true)}
             >
               <Menu size={22} />
             </button>
