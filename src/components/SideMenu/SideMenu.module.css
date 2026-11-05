@@ -1,0 +1,103 @@
+.menu {
+  position: fixed;
+  inset: 0 0 0 auto;
+  width: min(320px, 85vw);
+  max-width: none;
+  height: 100%;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+  background: var(--color-surface);
+  color: var(--color-text);
+  border: none;
+  border-left: 1px solid var(--color-border);
+}
+
+.menuContent {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+  min-height: 100%;
+  padding: var(--spacing-3) var(--spacing-4);
+}
+
+.menu::backdrop {
+  background: var(--color-overlay);
+}
+
+.menuHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-3);
+}
+
+.menuEmail {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.menuActions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+  margin-top: auto;
+}
+
+.menuDivider {
+  border: none;
+  border-top: 1px solid var(--color-border);
+  margin: var(--spacing-4) 0;
+}
+
+.button {
+  min-height: var(--tap-size);
+  padding: 0 var(--spacing-4);
+  background: var(--color-surface);
+  color: var(--color-text);
+  border: var(--border-width-strong) solid var(--color-border-strong);
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  transition: background-color 0.15s;
+}
+
+.button:hover {
+  background: var(--color-accent-soft);
+}
+
+.iconButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--tap-size);
+  padding: 0;
+}
+
+.email {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+}
+
+.link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--tap-size);
+  padding: 0 var(--spacing-4);
+  color: var(--color-text);
+  border: var(--border-width-strong) solid var(--color-border-strong);
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  text-decoration: none;
+  transition: background-color 0.15s;
+}
+
+.link:hover {
+  background: var(--color-accent-soft);
+}
+
+.active {
+  background: var(--color-accent-soft);
+  color: var(--color-accent-ink);
+}
