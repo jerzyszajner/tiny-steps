@@ -91,10 +91,20 @@ export function DeleteAccountDialog({
               placeholder="Enter your password"
               {...register("password")}
               autoComplete="current-password"
+              aria-invalid={!!errors.password}
+              aria-describedby={
+                errors.password ? "delete-password-error" : undefined
+              }
             />
           )}
           {errors.password && (
-            <p className={styles.error}>{errors.password.message}</p>
+            <p
+              className={styles.error}
+              id="delete-password-error"
+              role="alert"
+            >
+              {errors.password.message}
+            </p>
           )}
         </div>
         <div className={styles.actions}>
@@ -114,7 +124,11 @@ export function DeleteAccountDialog({
             Keep account
           </button>
         </div>
-        {error && <p className={styles.error}>{error}</p>}
+        {error && (
+          <p className={styles.error} role="alert">
+            {error}
+          </p>
+        )}
       </form>
     </dialog>
   );
