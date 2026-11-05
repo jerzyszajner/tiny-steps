@@ -1,5 +1,6 @@
 import { useShowDialog } from "../../hooks/useShowDialog";
 import type { SyntheticEvent } from "react";
+import styles from "./ConfirmDialog.module.css";
 
 type ConfirmDialogProps = {
   isOpen: boolean;
@@ -27,11 +28,19 @@ export function ConfirmDialog({
   }
 
   return (
-    <dialog ref={dialogRef} onCancel={handleDialogCancel}>
-      <p>{message}</p>
-      <div>
-        <button onClick={onConfirm}>{confirmLabel}</button>
-        <button onClick={onCancel}>{cancelLabel}</button>
+    <dialog
+      ref={dialogRef}
+      className={styles.dialog}
+      onCancel={handleDialogCancel}
+    >
+      <p className={styles.message}>{message}</p>
+      <div className={styles.actions}>
+        <button className={styles.confirm} onClick={onConfirm}>
+          {confirmLabel}
+        </button>
+        <button className={styles.cancel} onClick={onCancel}>
+          {cancelLabel}
+        </button>
       </div>
     </dialog>
   );
