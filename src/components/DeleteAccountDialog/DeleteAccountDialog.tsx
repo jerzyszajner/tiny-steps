@@ -6,6 +6,7 @@ import { useShowDialog } from "../../hooks/useShowDialog";
 import { deleteAccountSchema } from "../../schemas/deleteAccountSchema";
 import { deleteAccount } from "../../services/authService";
 import { getAuthErrorMessage } from "../../services/getAuthErrorMessage";
+import { PasswordInput } from "../PasswordInput/PasswordInput";
 import type { SyntheticEvent } from "react";
 import type { DeleteAccountFormValues } from "../../schemas/deleteAccountSchema";
 
@@ -18,16 +19,11 @@ export function DeleteAccountDialog({
   isOpen,
   onClose,
 }: DeleteAccountDialogProps) {
-  const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   const dialogRef = useShowDialog(isOpen);
 
   const navigate = useNavigate();
-
-  function togglePasswordVisibility() {
-    setShowPassword((prev) => !prev);
-  }
 
   const {
     register,
@@ -43,7 +39,6 @@ export function DeleteAccountDialog({
   function handleClose() {
     reset();
     setError(null);
-    setShowPassword(false);
     onClose();
   }
 
@@ -75,16 +70,15 @@ export function DeleteAccountDialog({
       <form noValidate onSubmit={handleSubmit(onSubmit)}>
         <p>Delete your account and all your tasks? This cannot be undone.</p>
         <label htmlFor="delete-password">Password</label>
-        <input
-          type={showPassword ? "text" : "password"}
-          id="delete-password"
-          placeholder="Enter your password"
-          {...register("password")}
-          autoComplete="current-password"
-        />
-        <button type="button" onClick={togglePasswordVisibility}>
-          {showPassword ? "Hide" : "Show"}
-        </button>
+        {/* mounted only while open, so the password is hidden again on reopen */}
+        {isOpen && (
+          <PasswordInput
+            id="delete-password"
+            placeholder="Enter your password"
+            {...register("password")}
+            autoComplete="current-password"
+          />
+        )}
         {errors.password && <p>{errors.password.message}</p>}
         <button type="submit" disabled={isSubmitting}>
           {isSubmitting ? "Deleting..." : "Delete account"}
