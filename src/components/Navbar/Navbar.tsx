@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router";
 import { Menu, X } from "lucide-react";
 import { useShowDialog } from "../../hooks/useShowDialog";
@@ -20,6 +20,18 @@ export function Navbar({ user, onLogout, onDeleteAccount }: NavbarProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const dialogRef = useShowDialog(isMenuOpen);
+
+  useEffect(() => {
+    // keep in sync with the breakpoint in Navbar.module.css
+    const mediaQuery = window.matchMedia("(min-width: 641px)");
+
+    function handleChange(e: MediaQueryListEvent) {
+      if (e.matches) setIsMenuOpen(false);
+    }
+
+    mediaQuery.addEventListener("change", handleChange);
+    return () => mediaQuery.removeEventListener("change", handleChange);
+  }, []);
 
   function handleBackdropClick(e: MouseEvent<HTMLDialogElement>) {
     if (e.target === e.currentTarget) setIsMenuOpen(false);
