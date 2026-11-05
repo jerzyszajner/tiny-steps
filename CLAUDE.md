@@ -34,3 +34,5 @@ No AI, UI libraries or Google Maps.
 
 - Global tokens only in `src/index.css` (`--color-*`, `--spacing-*`). Use only those values.
 - Until the styling step, components stay unstyled.
+- The whole app is mobile first: base styles are for the phone, larger screens are added with `min-width`. Every new component is styled for mobile right away.
+- Media queries are written as `@media screen and (min-width: 641px)` and always go at the bottom of the CSS Module file, grouped.

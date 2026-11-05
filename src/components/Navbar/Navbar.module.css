@@ -53,7 +53,7 @@
   padding: 0 var(--spacing-4);
   background: var(--color-surface);
   color: var(--color-text);
-  border: 1.5px solid var(--color-border-strong);
+  border: var(--border-width-strong) solid var(--color-border-strong);
   border-radius: var(--radius-md);
   font-weight: 600;
   transition: background-color 0.15s;
@@ -69,6 +69,73 @@
   justify-content: center;
   width: var(--tap-size);
   padding: 0;
+}
+
+.fullLinks {
+  display: none;
+}
+
+.menu {
+  position: fixed;
+  inset: 0 0 0 auto;
+  width: min(320px, 85vw);
+  max-width: none;
+  height: 100%;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+  background: var(--color-surface);
+  color: var(--color-text);
+  border: none;
+  border-left: 1px solid var(--color-border);
+}
+
+.menu[open] {
+  display: flex;
+  flex-direction: column;
+}
+
+.menu::backdrop {
+  background: var(--color-overlay);
+}
+
+.menuContent {
+  display: flex;
+  flex: 1 0 auto;
+  flex-direction: column;
+  gap: var(--spacing-2);
+  padding: var(--spacing-3) var(--spacing-4);
+}
+
+.menuHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-3);
+}
+
+.menuEmail {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.menuActions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+  margin-top: auto;
+}
+
+.menuDivider {
+  border: none;
+  border-top: 1px solid var(--color-border);
+  margin: var(--spacing-4) 0;
+}
+
+.menuActions .link {
+  justify-content: center;
+  border: var(--border-width-strong) solid var(--color-border-strong);
 }
 
 .email {
@@ -95,4 +162,14 @@
 .active {
   background: var(--color-accent-soft);
   color: var(--color-accent-ink);
+}
+
+@media screen and (min-width: 641px) {
+  .fullLinks {
+    display: contents;
+  }
+
+  .hamburger {
+    display: none;
+  }
 }
