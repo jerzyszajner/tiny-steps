@@ -1,27 +1,44 @@
-import { Link } from "react-router";
+import { Link, NavLink } from "react-router";
 import type { User } from "firebase/auth";
+import styles from "./Navbar.module.css";
 
 type NavbarProps = {
   user: User | null;
-  onClick: () => void;
-  onDeleteAccountClick: () => void;
+  onLogout: () => void;
+  onDeleteAccount: () => void;
 };
 
-export function Navbar({ user, onClick, onDeleteAccountClick }: NavbarProps) {
+function getLinkClass({ isActive }: { isActive: boolean }) {
+  return isActive ? `${styles.link} ${styles.active}` : styles.link;
+}
+
+export function Navbar({ user, onLogout, onDeleteAccount }: NavbarProps) {
   return (
-    <nav>
-      <Link to="/">tiny-steps</Link>
-      <div>
+    <nav className={styles.nav}>
+      <Link className={styles.logo} to="/">
+        tiny-steps
+      </Link>
+      <div className={styles.links}>
         {user ? (
           <>
-            <Link to="/">List</Link>
-            <Link to="/tasks/new">Add task</Link>
-            <span>{user.email}</span>
-            <button onClick={onClick}>Log out</button>
-            <button onClick={onDeleteAccountClick}>Delete account</button>
+            <NavLink className={getLinkClass} to="/" end>
+              List
+            </NavLink>
+            <NavLink className={getLinkClass} to="/tasks/new">
+              Add task
+            </NavLink>
+            <span className={styles.email}>{user.email}</span>
+            <button className={styles.button} onClick={onLogout}>
+              Log out
+            </button>
+            <button className={styles.button} onClick={onDeleteAccount}>
+              Delete account
+            </button>
           </>
         ) : (
-          <Link to="/login">Log in</Link>
+          <Link className={styles.primary} to="/login">
+            Log in
+          </Link>
         )}
       </div>
     </nav>

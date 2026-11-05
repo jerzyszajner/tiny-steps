@@ -16,8 +16,8 @@ export function Layout() {
       <header className={styles.header}>
         <Navbar
           user={user}
-          onClick={signOut}
-          onDeleteAccountClick={() => setIsDeleteDialogOpen(true)}
+          onLogout={signOut}
+          onDeleteAccount={() => setIsDeleteDialogOpen(true)}
         />
       </header>
       <main className={styles.main}>
