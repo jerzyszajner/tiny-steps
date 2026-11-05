@@ -42,7 +42,7 @@ export function Navbar({ user, onLogout, onDeleteAccount }: NavbarProps) {
               Delete account
             </button>
             <button
-              className={styles.button}
+              className={`${styles.button} ${styles.iconButton}`}
               aria-label="Open menu"
               aria-expanded={isMenuOpen}
               aria-controls="side-menu"
@@ -56,7 +56,7 @@ export function Navbar({ user, onLogout, onDeleteAccount }: NavbarProps) {
               onCancel={() => setIsMenuOpen(false)}
             >
               <button
-                className={styles.button}
+                className={`${styles.button} ${styles.iconButton}`}
                 aria-label="Close menu"
                 onClick={() => setIsMenuOpen(false)}
               >

@@ -63,6 +63,14 @@
   background: var(--color-accent-soft);
 }
 
+.iconButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--tap-size);
+  padding: 0;
+}
+
 .email {
   color: var(--color-text-muted);
   font-size: var(--font-size-sm);
