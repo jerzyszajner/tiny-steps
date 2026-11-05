@@ -1,3 +1,4 @@
+import { useId } from "react";
 import { useShowDialog } from "../../hooks/useShowDialog";
 import type { SyntheticEvent } from "react";
 import styles from "./ConfirmDialog.module.css";
@@ -20,6 +21,7 @@ export function ConfirmDialog({
   cancelLabel = "Cancel",
 }: ConfirmDialogProps) {
   const dialogRef = useShowDialog(isOpen);
+  const messageId = useId();
 
   function handleDialogCancel(e: SyntheticEvent<HTMLDialogElement>) {
     // Esc must not close the dialog on its own, the parent decides
@@ -31,14 +33,17 @@ export function ConfirmDialog({
     <dialog
       ref={dialogRef}
       className={styles.dialog}
+      aria-labelledby={messageId}
       onCancel={handleDialogCancel}
     >
-      <p className={styles.message}>{message}</p>
+      <p className={styles.message} id={messageId}>
+        {message}
+      </p>
       <div className={styles.actions}>
-        <button className={styles.cancel} onClick={onCancel}>
+        <button type="button" className={styles.cancel} onClick={onCancel}>
           {cancelLabel}
         </button>
-        <button className={styles.confirm} onClick={onConfirm}>
+        <button type="button" className={styles.confirm} onClick={onConfirm}>
           {confirmLabel}
         </button>
       </div>
