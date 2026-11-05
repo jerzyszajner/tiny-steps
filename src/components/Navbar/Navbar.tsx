@@ -50,7 +50,11 @@ export function Navbar({ user, onLogout, onDeleteAccount }: NavbarProps) {
             >
               <Menu size={22} />
             </button>
-            <dialog id="side-menu" ref={dialogRef}>
+            <dialog
+              id="side-menu"
+              ref={dialogRef}
+              onCancel={() => setIsMenuOpen(false)}
+            >
               <button
                 className={styles.button}
                 aria-label="Close menu"
