@@ -4,7 +4,7 @@ Task list filtered by available time and energy. Learning project (React + TypeS
 
 ## Stack
 
-Vite, React, TypeScript, React Router, Firebase (Auth + Firestore), CSS Modules.
+Vite, React, TypeScript, React Router, Firebase (Auth + Firestore), CSS Modules, lucide-react (icons only).
 No AI, UI libraries or Google Maps.
 
 ## Conventions
