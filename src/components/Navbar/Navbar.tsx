@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, NavLink } from "react-router";
 import { Menu, X } from "lucide-react";
 import { useShowDialog } from "../../hooks/useShowDialog";
+import type { MouseEvent } from "react";
 import type { User } from "firebase/auth";
 import styles from "./Navbar.module.css";
 
@@ -19,6 +20,20 @@ export function Navbar({ user, onLogout, onDeleteAccount }: NavbarProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const dialogRef = useShowDialog(isMenuOpen);
+
+  function handleBackdropClick(e: MouseEvent<HTMLDialogElement>) {
+    if (e.target === e.currentTarget) setIsMenuOpen(false);
+  }
+
+  function handleLogout() {
+    setIsMenuOpen(false);
+    onLogout();
+  }
+
+  function handleDeleteAccount() {
+    setIsMenuOpen(false);
+    onDeleteAccount();
+  }
 
   return (
     <nav className={styles.nav}>
@@ -57,54 +72,48 @@ export function Navbar({ user, onLogout, onDeleteAccount }: NavbarProps) {
               id="side-menu"
               ref={dialogRef}
               onCancel={() => setIsMenuOpen(false)}
+              onClick={handleBackdropClick}
             >
-              <div className={styles.menuHeader}>
-                <span className={`${styles.email} ${styles.menuEmail}`}>
-                  {user.email}
-                </span>
-                <button
-                  className={`${styles.button} ${styles.iconButton}`}
-                  aria-label="Close menu"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  <X size={22} />
-                </button>
-              </div>
-              <div className={styles.menuActions}>
-                <NavLink
-                  className={getLinkClass}
-                  to="/"
-                  end
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  List
-                </NavLink>
-                <NavLink
-                  className={getLinkClass}
-                  to="/tasks/new"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  Add task
-                </NavLink>
-                <hr className={styles.menuDivider} />
-                <button
-                  className={styles.button}
-                  onClick={() => {
-                    setIsMenuOpen(false);
-                    onLogout();
-                  }}
-                >
-                  Log out
-                </button>
-                <button
-                  className={styles.button}
-                  onClick={() => {
-                    setIsMenuOpen(false);
-                    onDeleteAccount();
-                  }}
-                >
-                  Delete account
-                </button>
+              <div className={styles.menuContent}>
+                <div className={styles.menuHeader}>
+                  <span className={`${styles.email} ${styles.menuEmail}`}>
+                    {user.email}
+                  </span>
+                  <button
+                    className={`${styles.button} ${styles.iconButton}`}
+                    aria-label="Close menu"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    <X size={22} />
+                  </button>
+                </div>
+                <div className={styles.menuActions}>
+                  <NavLink
+                    className={getLinkClass}
+                    to="/"
+                    end
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    List
+                  </NavLink>
+                  <NavLink
+                    className={getLinkClass}
+                    to="/tasks/new"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    Add task
+                  </NavLink>
+                  <hr className={styles.menuDivider} />
+                  <button className={styles.button} onClick={handleLogout}>
+                    Log out
+                  </button>
+                  <button
+                    className={styles.button}
+                    onClick={handleDeleteAccount}
+                  >
+                    Delete account
+                  </button>
+                </div>
               </div>
             </dialog>
           </>
