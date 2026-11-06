@@ -1,14 +1,28 @@
 import { useState } from "react";
 import { useTasks } from "../../hooks/useTasks";
 import { filterTask } from "../../utils/filterTasks";
+import { FilterRow } from "../../components/FilterRow/FilterRow";
 import { TaskCard } from "../../components/TaskCard/TaskCard";
 import type { StatusFilter, Task } from "../../types/task";
+import styles from "./HomePage.module.css";
 
-const statusText: Record<StatusFilter, string> = {
-  any: "Showing all tasks",
-  todo: "Showing tasks to do",
-  done: "Showing done tasks",
-};
+const minutesOptions: { value: Task["minutes"]; label: string }[] = [
+  { value: 5, label: "5 min" },
+  { value: 15, label: "15 min" },
+  { value: 30, label: "30 min" },
+];
+
+const energyOptions: { value: Task["energy"]; label: string }[] = [
+  { value: "low", label: "Low" },
+  { value: "medium", label: "Medium" },
+  { value: "high", label: "High" },
+];
+
+const statusOptions: { value: StatusFilter; label: string }[] = [
+  { value: "any", label: "Any" },
+  { value: "todo", label: "To do" },
+  { value: "done", label: "Done" },
+];
 
 export function HomePage() {
   const [maxMinutes, setMaxMinutes] = useState<Task["minutes"]>(30);
@@ -28,31 +42,50 @@ export function HomePage() {
   const visibleTasks = filterTask(tasks, maxMinutes, maxEnergy, statusFilter);
 
   return (
-    <>
-      <h1>Tasks</h1>
-      <button onClick={() => setMaxMinutes(5)}>5 min</button>
-      <button onClick={() => setMaxMinutes(15)}>15 min</button>
-      <button onClick={() => setMaxMinutes(30)}>30 min</button>
-      <p>Showing up to {maxMinutes} min</p>
-      <button onClick={() => setMaxEnergy("low")}>Low</button>
-      <button onClick={() => setMaxEnergy("medium")}>Medium</button>
-      <button onClick={() => setMaxEnergy("high")}>High</button>
-      <p>Showing up to {maxEnergy} energy</p>
-      <button onClick={() => setStatusFilter("any")}>Any</button>
-      <button onClick={() => setStatusFilter("todo")}>To do</button>
-      <button onClick={() => setStatusFilter("done")}>Done</button>
-      <p>{statusText[statusFilter]}</p>
+    <section className={styles.page}>
+      <div className={styles.intro}>
+        <h1 className={styles.title}>What can I do right now?</h1>
+        <p className={styles.subtitle}>
+          Set how much time and energy you have. The rest disappears.
+        </p>
+      </div>
+
+      <div className={styles.filters}>
+        <FilterRow
+          label="I have time"
+          options={minutesOptions}
+          value={maxMinutes}
+          onChange={setMaxMinutes}
+        />
+        <FilterRow
+          label="I have energy"
+          options={energyOptions}
+          value={maxEnergy}
+          onChange={setMaxEnergy}
+        />
+        <FilterRow
+          label="Show"
+          options={statusOptions}
+          value={statusFilter}
+          onChange={setStatusFilter}
+        />
+      </div>
+
+      <p className={styles.count} role="status">
+        Matches: {visibleTasks.length}
+      </p>
+
       {visibleTasks.length === 0 ? (
         <p>No tasks match these filters</p>
       ) : (
-        <ul>
+        <ul className={styles.taskList}>
           {visibleTasks.map((task) => (
-            <li key={task.id}>
+            <li key={task.id} className={styles.taskItem}>
               <TaskCard task={task} />
             </li>
           ))}
         </ul>
       )}
-    </>
+    </section>
   );
 }
