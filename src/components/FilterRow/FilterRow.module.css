@@ -1,0 +1,66 @@
+.row {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+}
+
+.label {
+  font-weight: 600;
+}
+
+.segment {
+  display: flex;
+  border: var(--border-width-strong) solid var(--color-border-strong);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.option {
+  flex: 1 1 0;
+  min-height: var(--tap-size);
+  padding: 0 var(--spacing-1);
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  white-space: nowrap;
+  border: none;
+  transition: background-color 0.15s;
+}
+
+.option + .option {
+  border-left: var(--border-width-strong) solid var(--color-border-strong);
+}
+
+.option:not(.active):hover {
+  background: var(--color-accent-soft);
+}
+
+.option:focus-visible {
+  outline-offset: -4px;
+}
+
+.active {
+  background: var(--color-accent);
+  color: var(--color-on-accent);
+  font-weight: 600;
+}
+
+.active:hover {
+  background: var(--color-accent-ink);
+}
+
+@media screen and (min-width: 641px) {
+  .row {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .label {
+    min-width: var(--label-width);
+  }
+
+  .segment {
+    width: var(--segment-width);
+  }
+}

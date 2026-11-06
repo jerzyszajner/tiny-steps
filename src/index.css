@@ -37,6 +37,8 @@
   --tap-size: 44px;
   --border-width-strong: 1.5px;
   --container-width: 920px;
+  --segment-width: 256px;
+  --label-width: 128px;
 }
 
 * {
