@@ -64,3 +64,4 @@ I built this project to refresh my React and TypeScript skills.
 - Building a mobile first layout with CSS Modules and shared design tokens.
 - Writing tests with Vitest and Testing Library.
 - Deploying to Netlify and testing the app on a real iPhone.
+- Working with Claude as an assistant: it helped with the plan, the mockup, the color and spacing spec, code reviews and debugging. I made the decisions and tested the result.
