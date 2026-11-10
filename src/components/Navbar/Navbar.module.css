@@ -86,6 +86,7 @@
   min-height: var(--tap-size);
   padding: 0 var(--spacing-4);
   color: var(--color-text);
+  border: var(--border-width-strong) solid var(--color-border-strong);
   border-radius: var(--radius-md);
   font-weight: 600;
   text-decoration: none;
@@ -97,8 +98,12 @@
 }
 
 .active {
-  background: var(--color-accent-soft);
-  color: var(--color-accent-ink);
+  background: var(--color-accent);
+  color: var(--color-on-accent);
+}
+
+.active:hover {
+  background: var(--color-accent-ink);
 }
 
 @media screen and (min-width: 641px) {
